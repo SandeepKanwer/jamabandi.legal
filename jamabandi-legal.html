@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jamabandi.Legal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hind:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#EEF2EF;
+  --surface:#F9FBF9;
+  --ink:#14261F;
+  --muted:#55665E;
+  --line:#CDD7D1;
+  --deodar:#17382C;
+  --on-deodar:#EAF1EC;
+  --accent:#C4362B;
+  --on-accent:#FFFFFF;
+  --mark:#F6C9BF;
+  --ok:#1E6B45;
+  --ok-bg:#D8EBDF;
+  --warn:#8A5A00;
+  --warn-bg:#F5E6BF;
+  --f-display:"Bricolage Grotesque","Hind",system-ui,sans-serif;
+  --f-body:"Hind","Noto Sans Devanagari",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1915;--surface:#16241E;--ink:#E5EEE8;--muted:#9DB0A6;--line:#28392F;
+    --deodar:#1B4131;--on-deodar:#EAF1EC;--accent:#EE5B4B;--on-accent:#1A0805;--mark:#5A2620;
+    --ok:#7ED3A2;--ok-bg:#1B3A2A;--warn:#F0C566;--warn-bg:#3D3110;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1915;--surface:#16241E;--ink:#E5EEE8;--muted:#9DB0A6;--line:#28392F;
+  --deodar:#1B4131;--on-deodar:#EAF1EC;--accent:#EE5B4B;--on-accent:#1A0805;--mark:#5A2620;
+  --ok:#7ED3A2;--ok-bg:#1B3A2A;--warn:#F0C566;--warn-bg:#3D3110;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;padding-inline:20px}
+.wrap{max-width:1120px;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:800;font-size:21px;letter-spacing:-.02em;text-decoration:none}
+.brand span{color:var(--accent)}
+.hdr-actions{display:flex;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{font:inherit;font-size:14px;font-weight:600;border:0;background:transparent;color:var(--muted);padding:5px 13px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--deodar);color:var(--on-deodar)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:16px;text-decoration:none;border:0;border-radius:10px;padding:13px 22px;cursor:pointer;background:var(--accent);color:var(--on-accent)}
+.btn:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.sm{padding:9px 16px;font-size:15px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-block:44px 64px}
+.hero h1{font-weight:800;font-size:clamp(2.5rem,6.2vw,4.6rem)}
+.hero h1 mark{background:linear-gradient(transparent 58%,var(--mark) 58%);color:inherit;padding:0 .08em;margin-inline:-.08em}
+.hero .hi-line{font-family:var(--f-body);font-weight:600;font-size:clamp(1.25rem,2.6vw,1.75rem);margin-top:18px;color:var(--deodar)}
+:root[data-theme="dark"] .hero .hi-line{color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero .hi-line{color:var(--ink)}}
+.hero .lede{max-width:52ch;margin-top:20px;color:var(--muted);font-size:18px}
+.owner-line{max-width:52ch;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:17px;font-weight:500}
+.owner-line a{color:var(--accent);font-weight:600;white-space:nowrap}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.proof{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:30px;font-size:15px;color:var(--muted)}
+.proof b{color:var(--ink);font-weight:600}
+
+/* record card */
+.record{background:var(--surface);border:1.5px solid var(--ink);border-radius:6px;position:relative;overflow:hidden}
+.record-top{background:var(--deodar);color:var(--on-deodar);padding:14px 18px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.record-top .t{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+.tag-sample{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;border:1px solid currentColor;border-radius:4px;padding:2px 7px;text-transform:uppercase}
+.record dl{margin:0;padding:6px 18px 4px}
+.record .row{display:grid;grid-template-columns:9.5rem 1fr;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
+.record .row:last-child{border-bottom:0}
+.record dt{color:var(--muted);font-size:14px}
+.record dd{margin:0;font-family:var(--f-mono);font-size:14.5px;font-weight:500;overflow-wrap:anywhere}
+.record .foot{display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px 18px;border-top:1.5px solid var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;padding:3px 11px;border-radius:999px;background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* ridgeline */
+.ridge{display:block;width:100%;height:auto;margin-top:0}
+.ridge .far{fill:var(--line)}
+.ridge .near{fill:var(--deodar)}
+
+/* sections */
+section{padding-block:64px}
+.sec-head{max-width:64ch;margin-bottom:34px}
+.sec-head h2{font-weight:800;font-size:clamp(1.9rem,4vw,2.9rem);margin-top:10px}
+.sec-head p{margin-top:14px;color:var(--muted)}
+
+/* highlights */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);border-block:1.5px solid var(--ink)}
+.benefit{padding:26px 22px 28px 0;display:flex;flex-direction:column;gap:8px}
+.benefit + .benefit{padding-left:22px;border-left:1px solid var(--line)}
+.benefit h3{font-size:1.28rem;font-weight:600}
+.benefit p{color:var(--muted);font-size:16px}
+.benefit .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+
+/* steps */
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;counter-reset:s}
+.steps li{counter-increment:s;padding-top:16px;border-top:3px solid var(--deodar);display:flex;flex-direction:column;gap:6px}
+:root[data-theme="dark"] .steps li{border-top-color:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .steps li{border-top-color:var(--accent)}}
+.steps li::before{content:"Step " counter(s);font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+html[data-lang="hi"] .steps li::before{content:"चरण " counter(s)}
+.steps h3{font-size:1.15rem;font-weight:600}
+.steps p{font-size:15.5px;color:var(--muted)}
+
+/* listings */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{font:inherit;font-size:15px;font-weight:500;padding:7px 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.note{font-size:14.5px;color:var(--muted);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.card .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card h3{font-size:1.3rem;font-weight:600}
+.card .loc{font-size:15px;color:var(--muted)}
+.card .kind{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.card .facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0;padding-block:14px;border-block:1px dashed var(--line)}
+.card .facts div{display:flex;flex-direction:column}
+.card dt{font-size:13px;color:var(--muted)}
+.card dd{margin:0;font-family:var(--f-mono);font-weight:500;font-size:15px}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:auto}
+.empty{grid-column:1/-1;color:var(--muted)}
+
+/* rates table */
+.tbl-wrap{overflow-x:auto;border:1.5px solid var(--ink);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:16px}
+caption{caption-side:top;text-align:left;padding:12px 16px;font-size:14px;color:var(--muted);border-bottom:1px solid var(--line)}
+th,td{text-align:left;padding:13px 16px;vertical-align:top}
+thead th{font-family:var(--f-mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:500;color:var(--on-deodar);background:var(--deodar);white-space:nowrap}
+tbody th{font-weight:600}
+tbody tr + tr > *{border-top:1px solid var(--line)}
+tbody tr.first > *{border-top:2px solid var(--ink)}
+tbody tr:first-child > *{border-top:0}
+td.num{font-family:var(--f-mono);font-weight:500;white-space:nowrap}
+.dist{font-family:var(--f-display);font-weight:600}
+.dist-cell{color:var(--muted);font-size:14px}
+.tbl-note{margin-top:14px;font-size:14.5px;color:var(--muted);max-width:80ch}
+.tbl-note a{color:var(--accent);font-weight:600}
+.sample-flag{display:inline-block;margin-left:8px;vertical-align:middle}
+
+/* owners / form */
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.checks{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:14px}
+.checks li{display:grid;grid-template-columns:22px 1fr;gap:12px}
+.checks li::before{content:"";width:14px;height:8px;border-left:3px solid var(--ok);border-bottom:3px solid var(--ok);transform:rotate(-45deg) translate(2px,4px)}
+form{background:var(--surface);border:1.5px solid var(--ink);border-radius:6px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form .full{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:6px;font-size:14.5px;font-weight:600}
+input,select,textarea{font:inherit;font-size:16px;font-weight:400;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;width:100%}
+textarea{min-height:88px;resize:vertical}
+.role{display:flex;gap:8px;flex-wrap:wrap}
+.role label{flex-direction:row;align-items:center;gap:8px;font-weight:500;border:1.5px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;background:var(--bg)}
+.role input{width:auto;accent-color:var(--accent)}
+.out{grid-column:1/-1;background:var(--bg);border:1.5px dashed var(--line);border-radius:8px;padding:14px;font-size:15px;white-space:pre-wrap}
+.out .actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.form-note{grid-column:1/-1;font-size:13.5px;color:var(--muted)}
+
+/* caution + faq */
+.caution{background:var(--deodar);color:var(--on-deodar);border-radius:6px;padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:.8fr 1.2fr;gap:36px}
+.caution h2{font-weight:800;font-size:clamp(1.7rem,3.4vw,2.4rem)}
+.caution .eyebrow{color:color-mix(in srgb,var(--on-deodar) 65%,transparent)}
+.caution ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.caution li{padding-bottom:14px;border-bottom:1px solid color-mix(in srgb,var(--on-deodar) 22%,transparent)}
+.caution li:last-child{border-bottom:0;padding-bottom:0}
+.caution li b{display:block;font-weight:600;font-size:1.05rem}
+.caution li span{opacity:.82;font-size:15.5px}
+details{border-top:1.5px solid var(--line);padding-block:18px}
+details:last-of-type{border-bottom:1.5px solid var(--line)}
+summary{cursor:pointer;font-family:var(--f-display);font-weight:600;font-size:1.2rem;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--accent)}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--muted);max-width:68ch}
+.faq{max-width:820px}
+
+footer{padding-block:40px 56px;border-top:1.5px solid var(--ink);display:grid;gap:12px;font-size:14.5px;color:var(--muted)}
+footer .brand{color:var(--ink)}
+footer p{max-width:80ch}
+
+/* responsive */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;gap:36px;padding-block:28px 44px}
+  .benefits{grid-template-columns:1fr 1fr}
+  .benefit:nth-child(3){padding-left:0;border-left:0}
+  .benefit:nth-child(n+3){border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .split,.caution{grid-template-columns:1fr;gap:30px}
+}
+@media (max-width:620px){
+  body{font-size:16.5px}
+  section{padding-block:46px}
+  .benefits,.steps,.grid{grid-template-columns:1fr}
+  .benefit,.benefit + .benefit{padding:20px 0;border-left:0}
+  .benefit + .benefit{border-top:1px solid var(--line)}
+  form{grid-template-columns:1fr;padding:20px}
+  .record .row{grid-template-columns:1fr;gap:2px}
+  .hdr-actions .btn{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="#top">Jamabandi<span>.</span>Legal</a>
+    <div class="hdr-actions">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" id="lang-en" aria-pressed="true">English</button>
+        <button type="button" id="lang-hi" aria-pressed="false" lang="hi">हिन्दी</button>
+      </div>
+      <a class="btn sm wa-link" href="#enquire" data-hi="व्हाट्सऐप करें">WhatsApp us</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" style="padding-top:44px">
+      <div>
+        <h1>Buy Land in Himachal <mark>from owners directly.</mark></h1>
+        <p class="hi-line" lang="hi">हिमाचल में ज़मीन खरीदें, सीधे मालिक से।</p>
+        <p class="lede" data-hi="खेती की ज़मीन से लेकर घर बनाने के प्लॉट तक, असली मालिक से बात कीजिए। पैसा देने से पहले फर्द (जमाबंदी की नकल), अक्स (खेत का नक्शा), तत्मीमा और इंतकाल की जाँच कीजिए।">From farm land to plots for a home, talk to the person whose name is on the jamabandi. Check the fard (the certified copy of the record), the aks (the field map), the tatima and the mutation before a rupee changes hands.</p>
+        <p class="owner-line"><span data-hi="हिमाचल में आपकी अपनी ज़मीन है? खरीदार से सीधे बात कीजिए और दाम खुद तय कीजिए।">Own land in Himachal? Speak to buyers yourself and set your own price.</span> <a href="#owners" data-hi="अपनी ज़मीन दर्ज कराएँ →">List your land →</a></p>
+        <div class="cta-row">
+          <a class="btn" href="#rates" data-hi="ज़मीन के भाव देखें">See land rates</a>
+          <a class="btn ghost" href="#owners" data-hi="अपनी ज़मीन बेचें">List your land</a>
+        </div>
+        <div class="proof">
+          <span><b data-hi="0 दलाली" >0 brokerage</b></span>
+          <span><b data-hi="मालिक से सीधी बात">Owner-to-buyer</b></span>
+          <span><b data-hi="धारा 118 की जानकारी">Section 118 guidance</b></span>
+        </div>
+      </div>
+
+      <aside class="record" aria-label="Sample land record">
+        <div class="record-top">
+          <span class="t" data-hi="जमाबंदी · अधिकार अभिलेख">Jamabandi · Record of Rights</span>
+          <span class="tag-sample" data-hi="नमूना">Sample</span>
+        </div>
+        <dl>
+          <div class="row"><dt data-hi="मौजा / गाँव">Mauza / Village</dt><dd>Sample Gram, Tehsil Una</dd></div>
+          <div class="row"><dt data-hi="खाता / खतौनी">Khata / Khatauni</dt><dd>24 / 31</dd></div>
+          <div class="row"><dt data-hi="खसरा नं.">Khasra no.</dt><dd>118/2</dd></div>
+          <div class="row"><dt data-hi="रकबा (कनाल-मरला)">Area (kanal-marla)</dt><dd>4-10</dd></div>
+          <div class="row"><dt data-hi="मालिक">Owner (Malik)</dt><dd>Name as on record</dd></div>
+        </dl>
+        <div class="foot">
+          <span class="pill" data-hi="इंतकाल दर्ज">Mutation recorded</span>
+          <span class="pill" data-hi="मालिक से मिलान">Owner ID matched</span>
+          <span class="pill warn" data-hi="धारा 118 जाँचें">Check Section 118</span>
+        </div>
+      </aside>
+    </section>
+
+    <svg class="ridge" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" role="presentation">
+      <polygon class="far" points="0,120 0,70 90,40 170,64 270,18 360,58 450,34 560,72 660,26 760,60 860,30 960,66 1060,38 1200,74 1200,120"/>
+      <polygon class="near" points="0,120 0,92 120,62 210,86 330,50 430,88 540,64 650,96 780,58 890,90 1000,68 1110,94 1200,80 1200,120"/>
+    </svg>
+
+    <section id="why" style="padding-top:56px">
+      <div class="sec-head">
+        <p class="eyebrow" data-hi="सीधी खरीद क्यों">Why buy direct</p>
+        <h2 data-hi="बीच में कोई नहीं। बस मालिक और आप।">No one in between. Just the owner and you.</h2>
+      </div>
+      <div class="benefits">
+        <div class="benefit"><span class="k" data-hi="दलाली">Brokerage</span><h3 data-hi="कोई कमीशन नहीं">No commission</h3><p data-hi="जो पैसा दलाल को जाता, वह आपके या मालिक के पास रहता है।">What would go to a broker stays with you or the seller.</p></div>
+        <div class="benefit"><span class="k" data-hi="जानकारी">Facts</span><h3 data-hi="ज़मीन की सही बात">The real story of the land</h3><p data-hi="रास्ता, पानी, बिजली और सीमा के बारे में सीधे मालिक से पूछिए।">Ask the owner directly about the road, water, power and boundaries.</p></div>
+        <div class="benefit"><span class="k" data-hi="रिकॉर्ड">Records</span><h3 data-hi="पहले कागज़, फिर पैसा">Papers first, money second</h3><p data-hi="जमाबंदी, तत्मीमा और इंतकाल मिलाइए, फिर ही बयाना दीजिए।">Match the jamabandi, tatima and mutation before any advance.</p></div>
+        <div class="benefit"><span class="k" data-hi="कानून">Law</span><h3 data-hi="धारा 118 पहले">Section 118 up front</h3><p data-hi="खरीदने के नियम पहले जान लीजिए। कृषक या गैर-हिमाचली खरीदार को मदद चाहिए तो हमारी टीम रास्ता दिखाती है।">Know the rules about buying. If you need help as an agriculturist or a non-Himachali buyer, our team shows the way.</p></div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="sec-head">
+        <p class="eyebrow" data-hi="प्रक्रिया">The process</p>
+        <h2 data-hi="मालिक से रजिस्ट्री तक, पाँच कदम">Five steps from first call to registry</h2>
+      </div>
+      <ol class="steps">
+        <li><h3 data-hi="ज़मीन ढूँढिए">Find the land</h3><p data-hi="ज़िला, इलाका और रकबा चुनिए। मालिक की सूची से चुनिए।">Pick a district, a village and a size from owner-listed land.</p></li>
+        <li><h3 data-hi="रिकॉर्ड जाँचिए">Verify the record</h3><p data-hi="जमाबंदी, खसरा, तत्मीमा और इंतकाल का मिलान कीजिए।">Match jamabandi, khasra, tatima and mutation with the owner's ID.</p></li>
+        <li><h3 data-hi="मालिक से मिलिए">Meet the owner</h3><p data-hi="मौके पर जाइए, सीमा देखिए, दाम और शर्तें तय कीजिए।">Visit the site, walk the boundary, agree price and terms.</p></li>
+        <li><h3 data-hi="अनुमति और कानूनी जाँच">Permissions and legal check</h3><p data-hi="ज़रूरत हो तो धारा 118 की अनुमति और वकील की राय लीजिए।">Where needed, get Section 118 permission and a lawyer's opinion.</p></li>
+        <li><h3 data-hi="रजिस्ट्री और इंतकाल">Registry and mutation</h3><p data-hi="रजिस्ट्री कराइए, फिर इंतकाल अपने नाम चढ़वाइए।">Register the sale, then get the mutation entered in your name.</p></li>
+      </ol>
+    </section>
+
+    <section id="rates">
+      <div class="sec-head">
+        <p class="eyebrow" data-hi="ज़मीन के भाव">Land rates</p>
+        <h2 data-hi="ज़िले और शहर के हिसाब से भाव">Land rates by district and town</h2>
+      </div>
+      <div class="tbl-wrap" role="region" aria-label="Land rates table" tabindex="0">
+        <table>
+          <caption><span data-hi="नमूना आँकड़े, प्रति मरला। असली भाव जोड़ने से पहले इन्हें बदलें।">Sample figures, per marla. Replace with verified rates before relying on them.</span><span class="tag-sample sample-flag" data-hi="नमूना">Sample</span></caption>
+          <thead><tr>
+            <th scope="col" data-hi="ज़िला">District</th>
+            <th scope="col" data-hi="शहर / इलाका">Town / area</th>
+            <th scope="col" data-hi="आम ज़मीन">Common land</th>
+            <th scope="col" data-hi="भाव (₹ प्रति मरला)">Rate (₹ per marla)</th>
+          </tr></thead>
+          <tbody id="rates-body"></tbody>
+        </table>
+      </div>
+      <p class="tbl-note"><span data-hi="भाव गाँव, सड़क और अनुमति की स्थिति के हिसाब से बदलते हैं। सरकारी सर्किल रेट यहाँ देखें:">Rates change with village, road access and permission status. Check the official circle rate here:</span> <a href="http://admis.hp.nic.in/circlerate" target="_blank" rel="noopener" data-hi="एकीकृत भू-अभिलेख पोर्टल">Integrated Land Records portal</a></p>
+    </section>
+
+    <section id="owners">
+      <div class="split">
+        <div>
+          <p class="eyebrow" data-hi="ज़मीन मालिकों के लिए">For land owners</p>
+          <h2 style="font-weight:800;font-size:clamp(1.9rem,4vw,2.9rem);margin-top:10px" data-hi="अपनी ज़मीन असली खरीदार तक पहुँचाइए">Put your land in front of serious buyers</h2>
+          <ul class="checks">
+            <li><span data-hi="आप दाम तय करते हैं, कोई कमीशन नहीं कटता।">You set the price. No commission is taken from it.</span></li>
+            <li><span data-hi="आपकी जमाबंदी पहले जाँची जाती है, ताकि खरीदार भरोसे से आए।">Your jamabandi is checked first, so buyers arrive with confidence.</span></li>
+            <li><span data-hi="आपका फ़ोन नंबर बिना पूछे किसी को नहीं दिया जाता।">Your phone number is never handed out without your say.</span></li>
+          </ul>
+        </div>
+
+        <form id="enquire" autocomplete="off">
+          <div class="full role" role="radiogroup" aria-label="I am">
+            <label><input type="radio" name="role" id="role-buy" value="buy" checked><span data-hi="मैं ज़मीन खरीदना चाहता हूँ">I want to buy</span></label>
+            <label><input type="radio" name="role" id="role-sell" value="sell"><span data-hi="मैं ज़मीन बेचना चाहता हूँ">I want to sell</span></label>
+          </div>
+          <label><span data-hi="आपका नाम">Your name</span><input id="f-name" type="text" placeholder="Name / नाम" required></label>
+          <label><span data-hi="फ़ोन / व्हाट्सऐप">Phone / WhatsApp</span><input id="f-phone" type="tel" inputmode="tel" placeholder="98xxxxxxxx" required></label>
+          <label><span data-hi="ज़िला">District</span>
+            <select id="f-district"></select>
+          </label>
+          <label><span data-hi="गाँव / इलाका">Village / area</span><input id="f-village" type="text" placeholder="Village / गाँव"></label>
+          <label class="full"><span data-hi="ज़मीन का ब्योरा">Land details</span><textarea id="f-msg" placeholder="Size in bigha-biswa, type of land, budget or asking price / रकबा, ज़मीन का प्रकार, बजट या मांगा दाम"></textarea></label>
+          <div class="full"><button class="btn" type="submit" data-hi="व्हाट्सऐप पर भेजें">Send on WhatsApp</button></div>
+          <div class="out" id="out" hidden></div>
+          <p class="form-note" data-hi="भेजने पर आपका संदेश व्हाट्सऐप में खुलेगा। वहाँ 'Send' दबाने पर ही संदेश जाएगा।">Your message opens in WhatsApp. It is sent only when you press Send there.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="sec-head">
+        <p class="eyebrow" data-hi="सवाल-जवाब">Questions</p>
+        <h2 data-hi="अक्सर पूछे जाने वाले सवाल">Questions people ask first</h2>
+      </div>
+      <div class="faq">
+        <details><summary data-hi="क्या बाहर का व्यक्ति हिमाचल में ज़मीन खरीद सकता है?">Can someone from outside Himachal buy land?</summary><p data-hi="कृषि भूमि पर बड़ी रोक है, और गैर-कृषक को राज्य सरकार की अनुमति चाहिए। नियम बदलते रहते हैं, इसलिए सौदे से पहले किसी स्थानीय वकील या राजस्व कार्यालय से पुष्टि कीजिए।">Restrictions on agricultural land are significant, and a non-agriculturist needs state government permission under Section 118. Rules change, so confirm with a local lawyer or the revenue office before committing.</p></details>
+        <details><summary data-hi="जमाबंदी क्या होती है?">What is a jamabandi?</summary><p data-hi="जमाबंदी गाँव की ज़मीन का अधिकार अभिलेख है। इसमें मालिक का नाम, खाता-खसरा नंबर और रकबा दर्ज रहता है।">It is the record of rights for land in a village. It lists the owner, the khata and khasra numbers, and the area held.</p></details>
+        <details><summary data-hi="क्या आप दाम में कमीशन लेते हैं?">Is a commission added to the price?</summary><p data-hi="इस पेज का मकसद खरीदार और मालिक को सीधे जोड़ना है। दाम मालिक और खरीदार आपस में तय करते हैं।">The point of this page is to connect buyer and owner directly. Price is agreed between the two of them.</p></details>
+        <details><summary data-hi="ज़मीन की नाप किस इकाई में होती है?">What units is land measured in?</summary><p data-hi="हिमाचल के रिकॉर्ड में आम तौर पर बीघा, बिस्वा और बिस्वांसी चलते हैं। कई जगह कनाल-मरला या वर्ग मीटर भी मिलते हैं। हमेशा रिकॉर्ड की इकाई के हिसाब से मिलान कीजिए।">Records in Himachal commonly use bigha, biswa and biswansi, and some places use kanal-marla or square metres. Always compare against the unit written in the record.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top">Jamabandi<span>.</span>Legal</a>
+    <p data-hi="खरीदार और विक्रेता के सभी अनुबंध हिमाचल प्रदेश के क्षेत्राधिकार के अधीन हैं।">All buyer and seller agreements are subject to the jurisdiction of Himachal Pradesh.</p>
+    <p data-hi="कॉपीराइट 2026, JISS Labs">Copyright 2026, JISS Labs</p>
+  </footer>
+</div>
+
+<script>
+/* Set your WhatsApp number here in international format, digits only (for example 919812345678). */
+var WA_NUMBER = "917070990777";
+
+var LANG = "en";
+var I18N_KEYS = [];
+var DISTRICTS = ["Una","Shimla","Kullu","Mandi","Kangra","Solan","Sirmaur"];
+var DIST_HI = {Una:"ऊना",Shimla:"शिमला",Kullu:"कुल्लू",Mandi:"मंडी",Kangra:"काँगड़ा",Solan:"सोलन",Sirmaur:"सिरमौर"};
+var RATES = [
+  {d:"Una",p:"Una",ph:"ऊना",u:"Plots and farmland",uh:"प्लॉट और खेती की ज़मीन",v:"₹ 90,000 – 2.5 lakh"},
+  {d:"Una",p:"Amb",ph:"अंब",u:"Farmland and plots",uh:"खेती की ज़मीन और प्लॉट",v:"₹ 80,000 – 2 lakh"},
+  {d:"Kangra",p:"Kangra",ph:"काँगड़ा",u:"Plots and farmland",uh:"प्लॉट और खेती की ज़मीन",v:"₹ 1 – 1.2 lakh"},
+  {d:"Kangra",p:"Dharamshala",ph:"धर्मशाला",u:"Building plots, view land",uh:"मकान के प्लॉट, नज़ारे वाली ज़मीन",v:"₹ 1.5 – 5 lakh"},
+  {d:"Kangra",p:"Ranital",ph:"रानीताल",u:"Farmland and plots",uh:"खेती की ज़मीन और प्लॉट",v:"₹ 60,000 – 80,000"},
+  {d:"Shimla",p:"Shimla",ph:"शिमला",u:"Building plots",uh:"मकान के प्लॉट",v:"₹ 3 – 10 lakh"},
+  {d:"Kullu",p:"Kullu",ph:"कुल्लू",u:"Orchards and plots",uh:"बागान और प्लॉट",v:"₹ 80,000 – 2.5 lakh"},
+  {d:"Kullu",p:"Manali",ph:"मनाली",u:"Orchards, building plots",uh:"बागान, मकान के प्लॉट",v:"₹ 2 – 8 lakh"}
+];
+
+function t(en, hi){ return LANG === "hi" ? hi : en; }
+
+function applyLang(){
+  document.documentElement.setAttribute("data-lang", LANG);
+  document.documentElement.setAttribute("lang", LANG === "hi" ? "hi" : "en");
+  var nodes = document.querySelectorAll("[data-hi]");
+  for (var i = 0; i < nodes.length; i++){
+    var n = nodes[i];
+    if (!n.hasAttribute("data-en")) n.setAttribute("data-en", n.textContent);
+    n.textContent = LANG === "hi" ? n.getAttribute("data-hi") : n.getAttribute("data-en");
+  }
+  document.getElementById("lang-en").setAttribute("aria-pressed", String(LANG === "en"));
+  document.getElementById("lang-hi").setAttribute("aria-pressed", String(LANG === "hi"));
+  renderRates(); renderDistrictSelect();
+}
+
+function renderRates(){
+  var tb = document.getElementById("rates-body");
+  tb.innerHTML = "";
+  var last = "";
+  RATES.forEach(function(x){
+    var tr = document.createElement("tr");
+    if (x.d !== last && last !== "") tr.className = "first";
+    var th = document.createElement("th"); th.scope = "row";
+    if (x.d !== last){ th.className = "dist"; th.textContent = t(x.d, DIST_HI[x.d]); }
+    else { th.className = "dist-cell"; th.textContent = ""; th.setAttribute("aria-label", t(x.d, DIST_HI[x.d])); }
+    var c2 = document.createElement("td"); c2.textContent = t(x.p, x.ph);
+    var c3 = document.createElement("td"); c3.textContent = t(x.u, x.uh);
+    var c4 = document.createElement("td"); c4.className = "num"; c4.textContent = x.v;
+    tr.appendChild(th); tr.appendChild(c2); tr.appendChild(c3); tr.appendChild(c4);
+    tb.appendChild(tr);
+    last = x.d;
+  });
+}
+
+function renderDistrictSelect(){
+  var s = document.getElementById("f-district");
+  var cur = s.value;
+  s.innerHTML = "";
+  DISTRICTS.concat(["Other"]).forEach(function(d){
+    var o = document.createElement("option"); o.value = d;
+    o.textContent = d === "Other" ? t("Other district","अन्य ज़िला") : t(d, DIST_HI[d]);
+    s.appendChild(o);
+  });
+  if (cur) s.value = cur;
+}
+
+function waHref(text){ return WA_NUMBER ? "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text) : ""; }
+
+document.getElementById("enquire").addEventListener("submit", function(e){
+  e.preventDefault();
+  var role = document.getElementById("role-sell").checked ? "sell" : "buy";
+  var name = document.getElementById("f-name").value.trim();
+  var phone = document.getElementById("f-phone").value.trim();
+  var dist = document.getElementById("f-district").value;
+  var vill = document.getElementById("f-village").value.trim();
+  var msg = document.getElementById("f-msg").value.trim();
+  var text = (role === "sell" ? "I want to sell land in Himachal." : "I want to buy land in Himachal.") +
+    "\nName: " + name + "\nPhone: " + phone + "\nDistrict: " + dist + (vill ? "\nVillage/area: " + vill : "") + (msg ? "\nDetails: " + msg : "");
+  var out = document.getElementById("out");
+  out.hidden = false;
+  out.innerHTML = "";
+  var pre = document.createElement("div"); pre.textContent = text; out.appendChild(pre);
+  var act = document.createElement("div"); act.className = "actions"; out.appendChild(act);
+  var link = waHref(text);
+  if (link){
+    try { window.open(link, "_blank", "noopener"); } catch(err){}
+    var a = document.createElement("a"); a.className = "btn sm"; a.href = link; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = t("Send on WhatsApp","व्हाट्सऐप पर भेजें"); act.appendChild(a);
+  }
+  var cp = document.createElement("button"); cp.type = "button"; cp.className = "btn sm ghost";
+  cp.textContent = t("Copy message","संदेश कॉपी करें");
+  cp.addEventListener("click", function(){
+    try { navigator.clipboard.writeText(text).then(function(){ cp.textContent = t("Copied","कॉपी हो गया"); }); }
+    catch(err){ cp.textContent = t("Select the text above and copy it","ऊपर का पाठ चुनकर कॉपी करें"); }
+  });
+  act.appendChild(cp);
+});
+
+var wl = document.querySelectorAll(".wa-link");
+for (var i = 0; i < wl.length; i++){
+  if (WA_NUMBER) wl[i].href = "https://wa.me/" + WA_NUMBER;
+}
+
+document.getElementById("lang-en").addEventListener("click", function(){ LANG = "en"; try{localStorage.setItem("jl-lang","en")}catch(e){} applyLang(); });
+document.getElementById("lang-hi").addEventListener("click", function(){ LANG = "hi"; try{localStorage.setItem("jl-lang","hi")}catch(e){} applyLang(); });
+
+try { var saved = localStorage.getItem("jl-lang"); if (saved === "hi") LANG = "hi"; } catch(e){}
+applyLang();
+</script>
+</body>
+</html>
